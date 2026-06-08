@@ -29,7 +29,7 @@ JomBarber is a Shariah-compliant web application designed using the Laravel Mode
 
 ---
 
-## ⚙️ Local Deployment Guide
+## Local Deployment Guide
 
 To install and review this project locally, run the following commands in order:
 
