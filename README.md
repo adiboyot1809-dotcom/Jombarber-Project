@@ -10,12 +10,12 @@
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 JomBarber is a Shariah-compliant web application designed using the Laravel Model-View-Controller (MVC) architecture. It bridges the gap between local barbershops and customers by offering an automatic queue numbering booking engine, interactive profiles, reservation tracking logs, and a dynamic rating system.
 
 ---
 
-## 🛠️ System Architecture & Grading Checklist Fulfillments
+## System Architecture & Grading Checklist Fulfillments
 
 ### 1. Model-View-Controller (MVC) Implementation
 * **Models (`app/Models/`):** Contains `User.php`, `Barber.php`, `Appointment.php`, and `Review.php` mapped through Eloquent Relationships.
