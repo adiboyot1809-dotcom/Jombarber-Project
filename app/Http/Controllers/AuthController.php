@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+class AuthController extends Controller 
+{
+    // 1. Show Login Page
+    public function showLogin() {
+        return view('login'); 
+    }
+
+    // 2. Handle Login Action
+    public function login(Request $request) {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/home');
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials provided.']);
+    }
+
+    // 3. SHOW REGISTER PAGE (This was the missing method causing your error!)
+    public function showRegister() {
+        return view('register');
+    }
+
+    // 4. Handle Registration Action
+    public function register(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+        return redirect()->route('home');
+    }
+
+    // 5. Handle Logout Action
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
+}
