@@ -1,64 +1,47 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# JomBarber: A Centralized Barber Appointment & Service Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Group Details (Section 1)
+* **Ammar Hakimi Azwari Bin Mohamad Haslan** (2415327) - Group Leader
+* **Muhammad Adib Bin Azmi** (2415951)
+* **Muhammad Haziq Bin Nasri** (2415543)
+* **Muhammad Mukhrizq Wafiq Bin Mohd Masri** (2417469)
+* **Muhammad Akmal Bin Ahmad Zailani** (2413967)
+* **Nik Nurul Fatihah Binti Wan Zamri** (2416020)
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Project Overview
+JomBarber is a Shariah-compliant web application designed using the Laravel Model-View-Controller (MVC) architecture. It bridges the gap between local barbershops and customers by offering an automatic queue numbering booking engine, interactive profiles, reservation tracking logs, and a dynamic rating system.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ System Architecture & Grading Checklist Fulfillments
 
-## Learning Laravel
+### 1. Model-View-Controller (MVC) Implementation
+* **Models (`app/Models/`):** Contains `User.php`, `Barber.php`, `Appointment.php`, and `Review.php` mapped through Eloquent Relationships.
+* **Controllers (`app/Http/Controllers/`):** * `AuthController` manages state protection, secure logins, and validations.
+  * `BookingController` processes reservations, dynamic 24-hour time formatting, and customer feedback.
+* **Views (`resources/views/`):** Uses the Blade templating layout engine. Page content loads into a central frame located at `master/app.blade.php`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. Media Integration & Design Scheme
+* **Media UI elements:** Employs crisp vector graphic styling via FontAwesome branding tags and image fallback slots for barbershops.
+* **Theme Layout:** Uses high-contrast structural classes from Tailwind CSS (Slate, Blue, and Amber color accents) to recreate the custom UI mockups gracefully.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## ⚙️ Local Deployment Guide
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+To install and review this project locally, run the following commands in order:
 
-### Premium Partners
+```bash
+# 1. Install dependencies
+composer install
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 2. Configure environment database tags inside your .env file
+# Ensure DB_DATABASE=jombarber_db is active
 
-## Contributing
+# 3. Create structural tables and populate mock data 
+php artisan migrate:fresh --seed
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# Jombarber-Project
-Final Project BIIT2305
->>>>>>> d174716c8715267e5ffc81863e32702ce8c378ef
+# 4. Fire up the local webserver
+php artisan serve
