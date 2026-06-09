@@ -98,9 +98,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/booking/history', [BookingController::class, 'history'])->name('booking.history');
 });
-Primary Controller Framework (app/Http/Controllers/)
-Controller.php: The abstract base parent template providing essential validation properties across the codebase.
 
-AuthController.php: Governs registration processing, credential validation, secure encryption checks, and session tracking states.
+🎮 Primary Controller Framework (app/Http/Controllers/)
+📝 Text Explanation of Controller Mechanics:
+Controller.php: Acts as the abstract base parent layout file providing core helper attributes used throughout all application sub-controllers. It manages foundational code setups and global input verification methods required across your codebase.
 
-BookingController.php: Drives core booking workflows, handles 24-hour time standardization, and generates unique queue token increments.
+AuthController.php: Completely governs the application registration routines, login credential handling, field data validations (checking for unique email formats and required matching text fields), secure password cryptographic hash checks, and active session tracking states to safely manage client access.
+
+BookingController.php: Systematically drives the central barber booking engine paths. It processes customer inputs, manages backend 24-hour time conversions to match standard database inputs, fetches active list objects, and executes unique counter evaluations to calculate real-time queue tokens seamlessly.
