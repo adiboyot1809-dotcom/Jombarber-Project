@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
 
 ### Data Model Configurations (**app/Models/**)
 ### User Model Configuration (**User.php**)
-bash/n
+bash
 class User extends Authenticatable {
     use HasFactory, Notifiable;
 
