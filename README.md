@@ -21,7 +21,6 @@
 ### Introduction
 JomBarber is a specialized, web-based centralized barber appointment management system engineered to modernize operations within the local grooming sector. Developed using the robust Laravel Model-View-Controller (MVC) architecture, the system provides an automated, real-time scheduler designed to eliminate physical waiting queues, optimize barber schedules, and enhance consumer convenience.
 
----
 
 ## Project Objectives
 
@@ -30,7 +29,6 @@ JomBarber is a specialized, web-based centralized barber appointment management 
 - **User Experience Goal**: Provide an intuitive, responsive user interface utilizing modular Blade structures for seamless booking actions.
 - **Business Goal**: Enable efficient digital queue sequencing and programmatic schedule management for barbershop merchants.
 
----
 
 ## Target Users
 
@@ -38,18 +36,17 @@ JomBarber is a specialized, web-based centralized barber appointment management 
 - **Barbers/Merchants**: Specialized professionals seeking to organize daily time blocks and view incoming client queue flows.
 - **System Administrators**: Management personnel overseeing user access control states and general platform configurations.
 
----
 
 ## Features and Functionalities
 
-### 👤 Customer Features
+### Customer Features
 - **User Registration & Login**: Secure user creation, input data validation rules, and session state initialization.
 - **Dynamic Barber Browsing**: Interactive interface displaying active barber profiles, specialties, and skills.
 - **Smart Booking Engine**: Seamless appointment scheduler with date picker layouts and localized parameter handling.
 - **Automatic Datetime Conversion**: Real-time conversion of 12-hour frontend time formats into backend-compliant database inputs.
 - **Sequential Ticket Tracking**: Immediate live calculations of specific queue placement tokens for any requested date.
 
-### ⚙️ Admin & Backend Features
+### Admin & Backend Features
 - **State-Protected Path Gateways**: Automatic guest middleware route shielding to block unauthorized booking panel access.
 - **Relational Integrity Mapping**: Robust table linkage mapping profiles across multiple relational entities.
 - **Queue Generation Logic**: Programmatic increments of daily booking indices to avoid booking index collisions.
@@ -58,13 +55,13 @@ JomBarber is a specialized, web-based centralized barber appointment management 
 
 ## Technical Implementation
 
-### 🛠️ Technology Stack
+### Technology Stack
 - **Backend Framework**: Laravel 12.x (MVC Architecture Pattern)
 - **Frontend Engine**: Blade Template Layouts with CSS Structural Frameworks
 - **Database Layer**: MySQL 8.x Persistent Storage Engine
 - **Local Host Environment**: XAMPP Control Panel Ecosystem
 
-### 🗄️ Database Design
+### Database Design
 
 #### Database Schema Overview
 The persistent storage layer contains three primary relational tables managed through Eloquent ORM abstractions to handle appointments seamlessly:
@@ -80,9 +77,9 @@ The persistent storage layer contains three primary relational tables managed th
 
 ---
 
-## 🚀 Laravel Components Implementation
+## Laravel Components Implementation
 
-### 📌 Routing Layout (`routes/web.php`)
+### Routing Layout (`routes/web.php`)
 ```php
 // Public Authentication Gateways
 Route::get('/', [AuthController::class, 'showLogin'])->name('login');
@@ -98,11 +95,25 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/booking/history', [BookingController::class, 'history'])->name('booking.history');
 });
+```
+### Primary Controller Framework (app/Http/Controllers/)
+### Text Explanation of Controller Mechanics:
+- **`Controller.php`**: Acts as the abstract base parent layout file providing core helper attributes used throughout all application sub-controllers. It manages foundational code setups and global input verification methods required across your codebase.
 
-🎮 Primary Controller Framework (app/Http/Controllers/)
-📝 Text Explanation of Controller Mechanics:
-Controller.php: Acts as the abstract base parent layout file providing core helper attributes used throughout all application sub-controllers. It manages foundational code setups and global input verification methods required across your codebase.
+- **`AuthController.php`**: Completely governs the application registration routines, login credential handling, field data validations (checking for unique email formats and required matching text fields), secure password cryptographic hash checks, and active session tracking states to safely manage client access.
 
-AuthController.php: Completely governs the application registration routines, login credential handling, field data validations (checking for unique email formats and required matching text fields), secure password cryptographic hash checks, and active session tracking states to safely manage client access.
+- **`BookingController.php`**: Systematically drives the central barber booking engine paths. It processes customer inputs, manages backend 24-hour time conversions to match standard database inputs, fetches active list objects, and executes unique counter evaluations to calculate real-time queue tokens seamlessly.
 
-BookingController.php: Systematically drives the central barber booking engine paths. It processes customer inputs, manages backend 24-hour time conversions to match standard database inputs, fetches active list objects, and executes unique counter evaluations to calculate real-time queue tokens seamlessly.
+### Data Model Configurations (**app/Models/**)
+### User Model Configuration (**User.php**)
+bash/n
+class User extends Authenticatable {
+    use HasFactory, Notifiable;
+
+    protected $fillable = ['name', 'email', 'password'];
+    protected $hidden = ['password', 'remember_token'];
+
+    public function appointments() {
+        return $this->hasMany(Appointment::class, 'user_id');
+    }
+}
