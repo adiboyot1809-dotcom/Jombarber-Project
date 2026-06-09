@@ -125,3 +125,18 @@ class User extends Authenticatable {
         return $this->hasMany(Appointment::class, 'user_id');
     }
 }
+```
+
+### Barber Model Configuration (`Barber.php`)
+```php
+class Barber extends Model {
+    use HasFactory;
+
+    protected $primaryKey = 'barber_id';
+    protected $fillable = ['name', 'specialty', 'status'];
+
+    public function appointments() {
+        return $this->hasMany(Appointment::class, 'barber_id');
+    }
+}
+```
