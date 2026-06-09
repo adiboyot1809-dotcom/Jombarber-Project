@@ -1,47 +1,106 @@
-# JomBarber: A Centralized Barber Appointment & Service Management System
+# JomBarber - Centralized Barber Appointment Management System
 
-## Group Details (Section 1)
-* **Ammar Hakimi Azwari Bin Mohamad Haslan** (2415327) - Group Leader
-* **Muhammad Adib Bin Azmi** (2415951)
-* **Muhammad Haziq Bin Nasri** (2415543)
-* **Muhammad Mukhrizq Wafiq Bin Mohd Masri** (2417469)
-* **Muhammad Akmal Bin Ahmad Zailani** (2413967)
-* **Nik Nurul Fatihah Binti Wan Zamri** (2416020)
+## Group Information
 
----
+**Group Name**: Section 1 - Group Matrix  
+**Course Code**: BIIT2305 (Web Application Development)  
+**Academic Institution**: International Islamic University Malaysia (IIUM)  
 
-##  Project Overview
-JomBarber is a Shariah-compliant web application designed using the Laravel Model-View-Controller (MVC) architecture. It bridges the gap between local barbershops and customers by offering an automatic queue numbering booking engine, interactive profiles, reservation tracking logs, and a dynamic rating system.
-
----
-
-## System Architecture & Grading Checklist Fulfillments
-
-### 1. Model-View-Controller (MVC) Implementation
-* **Models (`app/Models/`):** Contains `User.php`, `Barber.php`, `Appointment.php`, and `Review.php` mapped through Eloquent Relationships.
-* **Controllers (`app/Http/Controllers/`):** * `AuthController` manages state protection, secure logins, and validations.
-  * `BookingController` processes reservations, dynamic 24-hour time formatting, and customer feedback.
-* **Views (`resources/views/`):** Uses the Blade templating layout engine. Page content loads into a central frame located at `master/app.blade.php`.
-
-### 2. Media Integration & Design Scheme
-* **Media UI elements:** Employs crisp vector graphic styling via FontAwesome branding tags and image fallback slots for barbershops.
-* **Theme Layout:** Uses high-contrast structural classes from Tailwind CSS (Slate, Blue, and Amber color accents) to recreate the custom UI mockups gracefully.
+**Group Members** :
+- AMMAR HAKIMI AZWARI BIN MOHAMAD HASLAN - 2415327 (Group Leader)
+- MUHAMMAD ADIB BIN AZMI - 2415951
+- MUHAMMAD HAZIQ BIN NASRI - 2415543
+- MUHAMMAD MUKHRIZQ WAFIQ BIN MOHD MASRI - 2417469
+- MUHAMMAD AKMAL BIN AHMAD ZAILANI - 2413967
+- NIK NURUL FATIHAH BINTI WAN ZAMRI - 2416020
 
 ---
 
-## Local Deployment Guide
+## Project Overview
 
-To install and review this project locally, run the following commands in order:
+### Introduction
+JomBarber is a specialized, web-based centralized barber appointment management system engineered to modernize operations within the local grooming sector. Developed using the robust Laravel Model-View-Controller (MVC) architecture, the system provides an automated, real-time scheduler designed to eliminate physical waiting queues, optimize barber schedules, and enhance consumer convenience.
 
-```bash
-# 1. Install dependencies
-composer install
+---
 
-# 2. Configure environment database tags inside your .env file
-# Ensure DB_DATABASE=jombarber_db is active
+## Project Objectives
 
-# 3. Create structural tables and populate mock data 
-php artisan migrate:fresh --seed
+- **Primary Goal**: Create a functional, centralized barber appointment reservation platform connecting clients with specialized barbers.
+- **Technical Goal**: Correctly implement the Laravel MVC architecture framework with secure session tracking and clean CRUD operations.
+- **User Experience Goal**: Provide an intuitive, responsive user interface utilizing modular Blade structures for seamless booking actions.
+- **Business Goal**: Enable efficient digital queue sequencing and programmatic schedule management for barbershop merchants.
 
-# 4. Fire up the local webserver
-php artisan serve
+---
+
+## Target Users
+
+- **Shop Clients/Customers**: Individuals searching for convenient, digital slot bookings to eliminate walk-in waiting periods.
+- **Barbers/Merchants**: Specialized professionals seeking to organize daily time blocks and view incoming client queue flows.
+- **System Administrators**: Management personnel overseeing user access control states and general platform configurations.
+
+---
+
+## Features and Functionalities
+
+### 👤 Customer Features
+- **User Registration & Login**: Secure user creation, input data validation rules, and session state initialization.
+- **Dynamic Barber Browsing**: Interactive interface displaying active barber profiles, specialties, and skills.
+- **Smart Booking Engine**: Seamless appointment scheduler with date picker layouts and localized parameter handling.
+- **Automatic Datetime Conversion**: Real-time conversion of 12-hour frontend time formats into backend-compliant database inputs.
+- **Sequential Ticket Tracking**: Immediate live calculations of specific queue placement tokens for any requested date.
+
+### ⚙️ Admin & Backend Features
+- **State-Protected Path Gateways**: Automatic guest middleware route shielding to block unauthorized booking panel access.
+- **Relational Integrity Mapping**: Robust table linkage mapping profiles across multiple relational entities.
+- **Queue Generation Logic**: Programmatic increments of daily booking indices to avoid booking index collisions.
+
+---
+
+## Technical Implementation
+
+### 🛠️ Technology Stack
+- **Backend Framework**: Laravel 12.x (MVC Architecture Pattern)
+- **Frontend Engine**: Blade Template Layouts with CSS Structural Frameworks
+- **Database Layer**: MySQL 8.x Persistent Storage Engine
+- **Local Host Environment**: XAMPP Control Panel Ecosystem
+
+### 🗄️ Database Design
+
+#### Database Schema Overview
+The persistent storage layer contains three primary relational tables managed through Eloquent ORM abstractions to handle appointments seamlessly:
+
+- **`users`** - Stores client profiles, authentication strings, and hashed encryption credentials.
+- **`barbers`** - Registers merchant profile details, talent specialties, and active operational availability statuses.
+- **`appointments`** - Core transactional ledger tracking user selections, barber constraints, timestamps, and queue indices.
+
+#### Key Relational Mappings:
+- A **User** can place multiple appointments (**One-to-Many Relationship**).
+- A **Barber** can accept multiple client assignments (**One-to-Many Relationship**).
+- An **Appointment** belongs to one specific User and one specific Barber (**Belongs-To Inverse Relationships**).
+
+---
+
+## 🚀 Laravel Components Implementation
+
+### 📌 Routing Layout (`routes/web.php`)
+```php
+// Public Authentication Gateways
+Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+// Protected Client Routing Architecture (Middleware Encapsulated)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [BookingController::class, 'dashboard'])->name('dashboard');
+    Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/booking/history', [BookingController::class, 'history'])->name('booking.history');
+});
+Primary Controller Framework (app/Http/Controllers/)
+Controller.php: The abstract base parent template providing essential validation properties across the codebase.
+
+AuthController.php: Governs registration processing, credential validation, secure encryption checks, and session tracking states.
+
+BookingController.php: Drives core booking workflows, handles 24-hour time standardization, and generates unique queue token increments.
