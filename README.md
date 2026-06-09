@@ -105,9 +105,16 @@ Route::middleware(['auth'])->group(function () {
 - **`BookingController.php`**: Systematically drives the central barber booking engine paths. It processes customer inputs, manages backend 24-hour time conversions to match standard database inputs, fetches active list objects, and executes unique counter evaluations to calculate real-time queue tokens seamlessly.
 
 ### Data Model Configurations (**app/Models/**)
-### User Model Configuration (**User.php**)
+#### User Model Configuration (`User.php`)
+```php
+<?php
 
-php//
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 class User extends Authenticatable {
     use HasFactory, Notifiable;
 
