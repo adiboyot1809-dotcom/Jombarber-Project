@@ -51,8 +51,6 @@ JomBarber is a specialized, web-based centralized barber appointment management 
 - **Relational Integrity Mapping**: Robust table linkage mapping profiles across multiple relational entities.
 - **Queue Generation Logic**: Programmatic increments of daily booking indices to avoid booking index collisions.
 
----
-
 ## Technical Implementation
 
 ### Technology Stack
@@ -247,6 +245,6 @@ Queue Number = (Total Scheduled Appointments on Chosen Date) + 1
 ## Conclusion
 The JomBarber project successfully demonstrates a full-stack MVC appointment system using Laravel. It balances strict model-view segregation rules, verified authentication safeguards, and real-time query counters to solve concrete queuing inefficiencies within local service shops.
 
-- Project Completion Date: 12 June 2026
+- Submission Date: 12 June 2026
 
 - Course: BIIT 2305 Web Application Development
